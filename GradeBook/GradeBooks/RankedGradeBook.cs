@@ -21,7 +21,7 @@ namespace GradeBook.GradeBooks
             //find how many students is twenty percent of the total number of students
             var threshold = (int)Math.Ceiling(Students.Count * 0.2);
 
-            //order the list of grades for all students
+            //take each student's average grade and order into a list by descending order
             var grades = Students.OrderByDescending(e => e.AverageGrade).Select(e => e.AverageGrade).ToList();
 
             //create condition that takes input grade and determines what rank grade it will be
@@ -33,8 +33,18 @@ namespace GradeBook.GradeBooks
             {
                 return 'B';
             }
-
-            return 'F';
+            else if (grades[(threshold * 3) - 1] <= averageGrade)
+            {
+                return 'C';
+            }
+            else if (grades[(threshold * 4) - 1] <= averageGrade)
+            {
+                return 'D';
+            }
+            else
+            {
+                return 'F';
+            }
         }
     }
 }
